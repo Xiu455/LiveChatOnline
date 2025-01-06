@@ -76,6 +76,7 @@
 
     sendBtn.addEventListener('click', () => {
         let msg = messageInput.value.trim();
+        messageInput.value = '';
         sendMsg(msg);
     });
 
