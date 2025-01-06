@@ -14,9 +14,9 @@ const UIrouter = {
     視窗設定1
 */
 const windowSetting1 = {
-    width: 800,                                                // 視窗預設寬度
+    width: 550,                                                 // 視窗預設寬度
     height: 600,                                                // 視窗預設高度
-    minWidth: 500,                                             // 最小寬度
+    minWidth: 500,                                              // 最小寬度
     minHeight: 600,                                             // 最小高度
     // x: 100,                                                     // x預設位置
     // y: 100,                                                     // y預設位置
