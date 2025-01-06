@@ -55,7 +55,7 @@ const keyReg = () => {
 
     mainWindow = new BrowserWindow(windowSetting1);
     await mainWindow.loadFile(UIrouter.main);   // 開啟主視窗
-    mainWindow.webContents.openDevTools();      // 開啟開發模式
+    // mainWindow.webContents.openDevTools();      // 開啟開發模式
 
     keyReg();  // 按鍵註冊
 
