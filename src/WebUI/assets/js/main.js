@@ -3,16 +3,6 @@
     const webSocketURL = 'ws://xiu-test.serveirc.com:9090';
     const ws = new WebSocket(webSocketURL);
 
-    // 新增ws原型方法
-    ws.sendexp = data => {
-        switch (typeof data){
-            case 'object':
-                data = JSON.stringify(data);
-                break;
-        }
-        ws.send(data);
-    }
-
     ws.onopen = () => {
         console.log('開啟連線');
     }
