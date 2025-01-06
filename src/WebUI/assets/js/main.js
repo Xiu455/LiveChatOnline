@@ -7,7 +7,6 @@
 
         ws.sendexp(msg);
         addMsg.chatSelf(msg);
-        msgBox.scrollTop = msgBox.scrollHeight;
     }
 
     const addMsg = {
@@ -16,10 +15,16 @@
                 <div class="msg_join"><span>${msg}</span></div>
             `;
             msgBox.insertAdjacentHTML('beforeend', html);
+            msgBox.scrollTop = msgBox.scrollHeight;
         },
-        chat: (msg, data) => {
+        chat: (msg) => {
             let html = /*html*/`
+                <div class="msg_bar">
+                    <div class="msg" data-name="${msg.name}"><span>${msg.msg}</span></div>
+                </div>
             `;
+            msgBox.insertAdjacentHTML('beforeend', html);
+            msgBox.scrollTop = msgBox.scrollHeight;
         },
         chatSelf: (msg) => {
             let html = /*html*/`
@@ -28,6 +33,7 @@
                 </div>
             `;
             msgBox.insertAdjacentHTML('beforeend', html);
+            msgBox.scrollTop = msgBox.scrollHeight;
         }
 
     };
@@ -47,6 +53,7 @@
         console.log('斷開連線');
     }
 
+    // 接收到訊息
     ws.onmessage = event => {
         let res = void 0;
         try{
@@ -54,11 +61,15 @@
         }catch (e) {
             res = event.data;
         }
-        console.log(res);
+        // console.log('已接收到');
+        // console.log(res.data);
 
         switch(res.type){
             case 'join':
                 addMsg.join(res.data);
+                break;
+            case 'chat':
+                addMsg.chat(res.data);
                 break;
         }
     }
