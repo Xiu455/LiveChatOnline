@@ -3,28 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self'; object-src 'none';">
+    <title>線上聊天室</title>
+
+    <link rel="stylesheet" href="./assets/css/style.css">
+
     <script src="./public/js/WebSocketExpand.js"></script>
 </head>
 <body>
-    <button id="btn1" class="btn">測試</button>
+    <div id="app">
+        <div id="msg_box">
+            <div class="msg_bar">
+                <div class="msg" data-name="132.123.123.123"><span>留言測試1111111111111111111123123123123213211111111111111</span></div>
+            </div>
 
-    <script defer>
-        // window.electron.receive('test-response', (response) => {
-        //     console.log('收到主進程回應:', response);
-        // });
+            <div class="msg_bar self">
+                <div class="msg" data-name="127.0.0.1"><span>我是自己1232</span></div>
+            </div>
+        </div>
 
-        // document.querySelector('#btn1').addEventListener('click', async () => {
-        //     console.log('按鈕被點擊');
+        <div id="input_box">
+            <input type="text">
+            <button id="send_btn1"></button>
+        </div>
+    </div>
 
-        //     const result = await window.electron.invoke('test-reply');
-        //     console.log('使用 invoke 收到回應:', result);
+    <!-- <script>
+        window.electron.receive('test-response', (response) => {
+            console.log('收到主進程回應:', response);
+        });
+
+        document.querySelector('#btn1').addEventListener('click', async () => {
+            console.log('按鈕被點擊');
+
+            const result = await window.electron.invoke('test-reply');
+            console.log('使用 invoke 收到回應:', result);
                 
-        //     // 方法二：使用 send/receive
-        //     window.electron.send('test-click', '測試數據');
-        // });
-    </script>
+            // 方法二：使用 send/receive
+            window.electron.send('test-click', '測試數據');
+        });
+    </script> -->
 
-    <script src="./assets/js/main.js" defer></script>
+    <!-- <script src="./assets/js/main.js" defer></script> -->
 </body>
 </html>

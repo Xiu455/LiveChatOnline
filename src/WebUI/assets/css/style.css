@@ -1,0 +1,174 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Noto Sans TC", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+*:root {
+  --main-bg1: rgb(245, 245, 245);
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: var(--main-bg1);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #6ce4ff;
+  /* 滑塊顏色 */
+  border-radius: 4px;
+  /* 圓角 */
+}
+
+input, button, textarea {
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--main-bg1);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+#app {
+  width: 100%;
+  height: clamp(100vh, 100vh, 100vh);
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+#app > div {
+  width: 100%;
+}
+
+#msg_box {
+  flex: 1;
+  padding: 10px;
+  padding-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 40px;
+}
+#msg_box .msg_bar {
+  width: 100%;
+  height: max-content;
+  display: flex;
+}
+#msg_box .msg_bar .msg {
+  width: fit-content;
+  background-color: #ffffff;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 2ch;
+  padding: 5px 20px;
+  position: relative;
+}
+#msg_box .msg_bar .msg span {
+  width: max-content;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+#msg_box .msg_bar .msg::before {
+  content: attr(data-name);
+  color: gray;
+  font-size: 12px;
+  padding: 0 15px;
+  position: absolute;
+  top: 0;
+  transform: translate(0, -110%);
+}
+#msg_box .msg_bar:not(.self)::after {
+  content: "";
+  width: 20px;
+  display: block;
+}
+#msg_box .msg_bar:not(.self) .msg::before {
+  left: 0;
+}
+#msg_box .msg_bar.self::before {
+  content: "";
+  width: 20px;
+  display: block;
+}
+#msg_box .msg_bar.self .msg {
+  margin-left: auto;
+}
+#msg_box .msg_bar.self .msg::before {
+  right: 0;
+}
+
+#input_box {
+  height: 80px;
+  padding: 0 30px;
+  gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-around;
+}
+#input_box input {
+  height: 50%;
+  width: 100%;
+  background-color: white;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin-right: 1vw;
+  padding: 0 10px;
+}
+#input_box #send_btn1 {
+  height: 50%;
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.3s ease-in-out;
+}
+#input_box #send_btn1::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-image: url("../img/send.svg");
+  background-repeat: repeat;
+  background-size: cover;
+  position: absolute;
+  transform: scale(0.8) translate(-1.5px, 1.5px);
+}
+#input_box #send_btn1::before {
+  --bdw: 0px;
+  content: "";
+  width: calc(100% - var(--bdw) * 2);
+  height: calc(100% - var(--bdw) * 2);
+  background-color: black;
+  border-radius: 99999px;
+  position: absolute;
+}
+#input_box #send_btn1:hover {
+  transform: scale(1.1);
+}
+#input_box #send_btn1:active {
+  transform: scale(0.9);
+}

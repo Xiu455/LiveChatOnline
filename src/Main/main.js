@@ -1,6 +1,6 @@
 // @charset "UTF-8";
 
-const fs = require('fs');
+// const fs = require('fs');
 const { join, dirname, parse } = require('path');
 const { app, BrowserWindow, dialog, ipcMain, globalShortcut } = require('electron');
 
@@ -14,9 +14,9 @@ const UIrouter = {
     視窗設定1
 */
 const windowSetting1 = {
-    width: 1000,                                                // 視窗預設寬度
+    width: 800,                                                // 視窗預設寬度
     height: 600,                                                // 視窗預設高度
-    minWidth: 1000,                                             // 最小寬度
+    minWidth: 500,                                             // 最小寬度
     minHeight: 600,                                             // 最小高度
     // x: 100,                                                     // x預設位置
     // y: 100,                                                     // y預設位置
@@ -50,10 +50,9 @@ const keyReg = () => {
 }
 
 (async () => {
-    
-
     app.on('ready', () => { app.locale = 'zh-TW'; });   // 設定語言
-    await app.whenReady();                      // 等待app準備好
+    await app.whenReady();  // 等待app準備好
+
     mainWindow = new BrowserWindow(windowSetting1);
     await mainWindow.loadFile(UIrouter.main);   // 開啟主視窗
     mainWindow.webContents.openDevTools();      // 開啟開發模式
