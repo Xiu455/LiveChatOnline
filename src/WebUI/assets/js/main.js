@@ -78,4 +78,11 @@
         let msg = messageInput.value.trim();
         sendMsg(msg);
     });
+
+    messageInput.addEventListener('keydown', (event) => {
+        if(event.keyCode === 13){
+            event.preventDefault();
+            sendBtn.click();
+        }
+    });
 })();
