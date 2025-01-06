@@ -1,5 +1,41 @@
 (() => {
-    const btn1 = document.getElementById('btn1');
+    const sendMsg = (msg='') => {
+        if(msg === ''){
+            console.log('請輸入訊息');
+            return;
+        }
+
+        ws.sendexp(msg);
+        addMsg.chatSelf(msg);
+        msgBox.scrollTop = msgBox.scrollHeight;
+    }
+
+    const addMsg = {
+        join: (msg) => {
+            let html = /*html*/`
+                <div class="msg_join"><span>${msg}</span></div>
+            `;
+            msgBox.insertAdjacentHTML('beforeend', html);
+        },
+        chat: (msg, data) => {
+            let html = /*html*/`
+            `;
+        },
+        chatSelf: (msg) => {
+            let html = /*html*/`
+                <div class="msg_bar self">
+                    <div class="msg" data-name="我"><span>${msg}</span></div>
+                </div>
+            `;
+            msgBox.insertAdjacentHTML('beforeend', html);
+        }
+
+    };
+
+    const msgBox = document.querySelector('#msg_box');
+    const sendBtn = document.getElementById('send_btn1');
+    const messageInput = document.querySelector('#input_box input');
+
     const webSocketURL = 'ws://xiu-test.serveirc.com:9090';
     const ws = new WebSocket(webSocketURL);
 
@@ -12,11 +48,23 @@
     }
 
     ws.onmessage = event => {
-        let response = event.data;
-        console.log('收到資料', response);
+        let res = void 0;
+        try{
+            res = JSON.parse(event.data);
+        }catch (e) {
+            res = event.data;
+        }
+        console.log(res);
+
+        switch(res.type){
+            case 'join':
+                addMsg.join(res.data);
+                break;
+        }
     }
 
-    btn1.addEventListener('click', () => {
-        ws.sendexp('Hello World!');
+    sendBtn.addEventListener('click', () => {
+        let msg = messageInput.value.trim();
+        sendMsg(msg);
     });
 })();

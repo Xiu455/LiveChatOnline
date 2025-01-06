@@ -78,10 +78,12 @@ body{
     flex: 1;
     padding: 10px;
     padding-top: 50px;
+    overflow-x: hidden;
+    overflow-y: auto;
 
     @include flex-center(2);
 
-    gap: 40px;
+    gap: 30px;
 
     .msg_bar{
         width: 100%;
@@ -141,6 +143,16 @@ body{
             &::before{
                 right: 0;
             }
+        }
+    }
+
+    .msg_join{
+        width: 100%;
+        @include flex-center();
+
+        span{
+            color: rgb(80, 80, 80);
+            font-size: .6rem;
         }
     }
 }
