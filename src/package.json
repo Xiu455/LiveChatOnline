@@ -1,13 +1,12 @@
 {
   "name": "src",
-  "version": "1.0.0",
+  "version": "0.8.1",
   "main": "./Main/main.js",
   "scripts": {
     "start": "chcp 65001 && electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "pack": "electron-builder --dir",
-    "pack-dist": "electron-builder",
-    "package-win": "electron-packager . LiveChatOnline --platform=win32 --arch=x64 --icon=./Main/assets/icon/icon.ico"
+    "pack-dist": "electron-builder"
   },
   "build": {
     "appId": "com.example.app",
