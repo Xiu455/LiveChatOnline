@@ -19,7 +19,12 @@
 			"!.vscode",
 			"build/"
 		],
-		"asar": false
+		"asar": false,
+    "win": {
+		  "icon": "./Main/assets/img/icon.png"
+		},
+		"mac": {  },
+		"linux": {  }
 	},
   "keywords": [],
   "author": "",
@@ -30,6 +35,5 @@
     "electron-builder": "^25.1.8"
   },
   "charset": "UTF-8",
-  "dependencies": {
-  }
+  "dependencies": {}
 }
