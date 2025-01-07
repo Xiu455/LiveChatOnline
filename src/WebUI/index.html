@@ -20,22 +20,6 @@
         </div>
     </div>
 
-    <!-- <script>
-        window.electron.receive('test-response', (response) => {
-            console.log('收到主進程回應:', response);
-        });
-
-        document.querySelector('#btn1').addEventListener('click', async () => {
-            console.log('按鈕被點擊');
-
-            const result = await window.electron.invoke('test-reply');
-            console.log('使用 invoke 收到回應:', result);
-                
-            // 方法二：使用 send/receive
-            window.electron.send('test-click', '測試數據');
-        });
-    </script> -->
-
     <script src="./assets/js/main.js" defer></script>
 </body>
 </html>
