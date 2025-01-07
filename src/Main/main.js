@@ -20,6 +20,7 @@ const windowSetting1 = {
     minHeight: 600,                                             // 最小高度
     // x: 100,                                                     // x預設位置
     // y: 100,                                                     // y預設位置
+    icon: join(__dirname, 'assets/icon/.ico'),                  // 視窗圖標
     webPreferences: {
         preload: join(__dirname, 'preload.js'),                 // 預先引入
         devTools: true,                                         // 是否啟用devTools

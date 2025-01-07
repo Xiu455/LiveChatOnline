@@ -6,7 +6,8 @@
     "start": "chcp 65001 && electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "pack": "electron-builder --dir",
-    "pack-dist": "electron-builder"
+    "pack-dist": "electron-builder",
+    "package-win": "electron-packager . LiveChatOnline --platform=win32 --arch=x64 --icon=./Main/assets/icon/icon.ico"
   },
   "build": {
     "appId": "com.example.app",
@@ -17,9 +18,18 @@
     "files": [
       "**/*",
       "!.vscode",
-      "build/"
+      "!pack/"
     ],
-    "asar": false
+    "asar": false,
+    "win": {
+      "icon": "./Main/assets/icon/icon.png",
+      "target": ["portable"]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true
+    }
   },
   "keywords": [],
   "author": "",
@@ -27,7 +37,8 @@
   "description": "it's a live chat online app",
   "devDependencies": {
     "electron": "^33.2.1",
-    "electron-builder": "^25.1.8"
+    "electron-builder": "^25.1.8",
+    "electron-packager": "^17.1.2"
   },
   "charset": "UTF-8"
 }

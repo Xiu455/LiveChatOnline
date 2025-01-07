@@ -1,4 +1,55 @@
 (() => {
+    // 連線
+    const connect = (webSocketURL) => {
+        LD1.open();
+
+        ws = new WebSocket(webSocketURL);
+
+        ws.onopen = () => {
+            console.log('連線成功');
+            LD1.close();
+        }
+    
+        ws.onclose = () => {
+            console.log('連線中斷');
+            LD1.open();
+            reconnect();
+        }
+
+        ws.onerror = event => {
+            // console.log(`發生錯誤: `, event);
+            ws.close();
+        }
+    
+        // 接收到訊息
+        ws.onmessage = event => {
+            let res = void 0;
+            try{
+                res = JSON.parse(event.data);
+            }catch (e) {
+                res = event.data;
+            }
+            // console.log('已接收到');
+            // console.log(res.data);
+    
+            switch(res.type){
+                case 'join':
+                    addMsg.join(res.data);
+                    break;
+                case 'chat':
+                    addMsg.chat(res.data);
+                    break;
+            }
+        }
+    }
+
+    // 重新連線
+    const reconnect = async(ms=3000) => {
+        console.log('嘗試重新連線中...');
+        await delay(ms);
+        connect(webSocketURL);
+    }
+
     // 發送訊息
     const sendMsg = (msg='') => {
         if(msg === ''){
@@ -40,6 +91,9 @@
 
     };
 
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+    // loading dom 擴展
     const loadingDomExp = {
         open: function(){
             this.setAttribute('open', '');
@@ -56,48 +110,19 @@
 
     Object.assign(LD1, loadingDomExp);
 
+    let ws = void 0;
     const webSocketURL = 'ws://xiu-test.serveirc.com:9090';
-    const ws = new WebSocket(webSocketURL);
 
-    LD1.open();
+    connect(webSocketURL);
 
-    ws.onopen = () => {
-        console.log('開啟連線');
-    }
-
-    ws.onclose = () => {
-        console.log('斷開連線');
-    }
-
-    // 接收到訊息
-    ws.onmessage = event => {
-        let res = void 0;
-        try{
-            res = JSON.parse(event.data);
-        }catch (e) {
-            res = event.data;
-        }
-        // console.log('已接收到');
-        // console.log(res.data);
-
-        switch(res.type){
-            case 'join':
-                addMsg.join(res.data);
-                break;
-            case 'chat':
-                addMsg.chat(res.data);
-                break;
-        }
-    }
-
-    // 發送訊息
+    // 發送訊息(Button)
     sendBtn.addEventListener('click', () => {
         let msg = messageInput.value.trim();
         messageInput.value = '';
         sendMsg(msg);
     });
 
-    // 捕捉Enter按鍵
+    // 發送訊息(Enter Key)
     messageInput.addEventListener('keydown', (event) => {
         if(event.keyCode === 13){
             event.preventDefault();
