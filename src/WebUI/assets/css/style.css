@@ -48,6 +48,43 @@ body {
   flex-direction: column;
 }
 
+.loading {
+  --icon_w: 20px;
+  min-width: max-content;
+  min-height: max-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+.loading::before {
+  content: "";
+  width: var(--icon_w);
+  aspect-ratio: 1/1;
+  background-image: url("../img/loading.svg");
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading[open] {
+  display: flex;
+}
+
 #app {
   width: 100%;
   height: clamp(100vh, 100vh, 100vh);
@@ -60,6 +97,13 @@ body {
 }
 #app > div {
   width: 100%;
+}
+#app .loading {
+  --icon_w: 10vh;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(170, 170, 170, 0.8);
+  backdrop-filter: blur(2px);
 }
 
 #msg_box {
