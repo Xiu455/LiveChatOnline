@@ -36,17 +36,20 @@ const windowSetting1 = {
 const keyReg = () => {
     let openDevToolsflag = false;
 
-    // F11註冊為 開啟/關閉 開發模式
-    globalShortcut.register('F11', () => {
-        openDevToolsflag = !openDevToolsflag;
-        openDevToolsflag?
-            mainWindow.webContents.openDevTools() :
-            mainWindow.webContents.closeDevTools();
-    });
-
-    // F5註冊為 '畫面刷新'
-    globalShortcut.register('F5', () => {
-        mainWindow.webContents.reload();
+    mainWindow.webContents.on('before-input-event', (event, input) => {
+        if(input.type !== 'keyDown'){ return; }
+        switch(input.key){
+            case 'F5':  // 刷新畫面
+                event.preventDefault();
+                mainWindow.webContents.reload();
+                break;
+            case 'F12': // 開啟/關閉 開發模式
+                openDevToolsflag = !openDevToolsflag;
+                openDevToolsflag?
+                    mainWindow.webContents.openDevTools() :
+                    mainWindow.webContents.closeDevTools();
+                break;
+        }
     });
 }
 
@@ -78,6 +81,7 @@ const keyReg = () => {
     });
 
     app.on('window-all-closed', () => {
+        globalShortcut.unregisterAll();
         if(process.platform !== 'darwin') app.quit();
     });
 })();
