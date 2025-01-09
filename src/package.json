@@ -1,6 +1,6 @@
 {
   "name": "src",
-  "version": "1.0.0",
+  "version": "0.8.3",
   "main": "./Main/main.js",
   "scripts": {
     "start": "chcp 65001 && electron .",
