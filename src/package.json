@@ -23,7 +23,9 @@
     "asar": false,
     "win": {
       "icon": "./Main/assets/icon/icon.png",
-      "target": ["portable"]
+      "target": [
+        "portable"
+      ]
     },
     "nsis": {
       "oneClick": false,
@@ -36,7 +38,7 @@
   "license": "ISC",
   "description": "it's a live chat online app",
   "devDependencies": {
-    "electron": "^33.2.1",
+    "electron": "^33.3.1",
     "electron-builder": "^25.1.8",
     "electron-packager": "^17.1.2"
   },
